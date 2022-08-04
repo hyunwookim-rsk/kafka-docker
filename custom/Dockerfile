@@ -1,5 +1,7 @@
 FROM openjdk:8u342-oracle
 
+EXPOSE 2181
+
 RUN apt-get update
 RUN apt-get install wget -y
 
