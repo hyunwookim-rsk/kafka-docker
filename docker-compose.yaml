@@ -1,0 +1,27 @@
+version: '3.8'
+
+networks:
+  kafka_net:
+    driver: "bridge"
+
+services:
+  zookeeper:
+    build: ./zookeeper
+    image: zookeeper_image
+    networks:
+      - kafka_net
+    ports:
+      - "2181:2181"
+    restart: always
+    container_name: zookeeper_container
+  kafka_broker1:
+    build: ./kafka_broker1
+    image: kafka_broker
+    networks:
+      - kafka_net
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    restart: always
+    container_name: kafka_broker_1_container
